@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 createPreference(result);
                                 Toast.makeText(this, "You won't need to login until you hit logout", Toast.LENGTH_SHORT).show();
                             }
-                            //moveToMainMenu(result);
+                            moveToMainMenu(result);
                         }
 
                     } else {
