@@ -7,11 +7,14 @@ import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
 
 public class userDetails extends AppCompatActivity {
     Context context = this;
@@ -49,9 +52,9 @@ public class userDetails extends AppCompatActivity {
             Toast.makeText(this, "There is no Car Reg entered", Toast.LENGTH_SHORT).show();
         } else {
             try {
-                String json = convertToJson(firstNameEntered, lastNameEntered, passwordEntered, carRegEntered);
                 if(checkNetworkConnection()){
-
+                    String json = convertToJson(firstNameEntered, lastNameEntered, passwordEntered, carRegEntered);
+                    updateUser(json);
                 } else {
                     Toast.makeText(this, "Web connection unavaliable. Please reconnect.", Toast.LENGTH_SHORT).show();
                 }
@@ -59,6 +62,31 @@ public class userDetails extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void deleteUser(View view){
+        CheckBox delete = findViewById(R.id.checkBoxConfirmDelete);
+        if(delete.isChecked()){
+            Toast.makeText(this, "Delete User", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Don't Delete", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void updateUser(String json){
+        String result = "";
+        try{
+            webConnection web = new webConnection();
+            final String host = "www.foxcoparkingsolution.co.uk";
+            final String file = "/mobile/updateUserDetails.php";
+
+            result = web.urlConnection(host, file, json);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+
     }
 
     private boolean checkNetworkConnection(){
@@ -78,7 +106,10 @@ public class userDetails extends AppCompatActivity {
         userDetails.put("carReg", carRegEntered);
         if(!passwordEntered.isEmpty()){
             userDetails.put("password", passwordEntered);
+        } else {
+            userDetails.put("password", "none");
         }
+        userDetails.put("emailAddress", storedDetails.getInstance().getCustomerEmail());
 
 
         String result = userDetails.toString();
