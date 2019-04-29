@@ -45,16 +45,15 @@ public class MainMenu extends AppCompatActivity {
             final String host = "www.foxcoparkingsolution.co.uk";
             final String file = "/mobile/userDetails.php";
             String json = convertToJson(customerID);
+            webConnection web = new webConnection();
 
-            if(checkNetworkConnection()){
-                webConnection web = new webConnection();
+            if(web.checkNetworkConnection(context)){
 
                 String result = web.urlConnection(host, file, json);
 
                 if (result.equals("False")){
                     Toast.makeText(this, "Login Failed. Try Again", Toast.LENGTH_LONG).show();
                 } else{
-                    //Toast.makeText(this, result, Toast.LENGTH_LONG).show();
                     decodeJson(result);
                 }
 
@@ -67,14 +66,6 @@ public class MainMenu extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
-    private boolean checkNetworkConnection(){
-        ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
-        return isConnected;
     }
 
     private String convertToJson(String customerID) throws JSONException {

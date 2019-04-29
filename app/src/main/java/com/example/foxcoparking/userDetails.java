@@ -54,7 +54,8 @@ public class userDetails extends AppCompatActivity {
             Toast.makeText(this, "There is no Car Reg entered", Toast.LENGTH_SHORT).show();
         } else {
             try {
-                if(checkNetworkConnection()){
+                webConnection web = new webConnection();
+                if(web.checkNetworkConnection(context)){
                     String json = convertToJson(firstNameEntered, lastNameEntered, passwordEntered, carRegEntered);
                     updateUser(json);
                 } else {
@@ -115,14 +116,6 @@ public class userDetails extends AppCompatActivity {
 
         Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
 
-    }
-
-    private boolean checkNetworkConnection(){
-        ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
-        return isConnected;
     }
 
     private String convertToJson(String firstNameEntered, String lastNameEntered, String passwordEntered, String carRegEntered) throws JSONException {

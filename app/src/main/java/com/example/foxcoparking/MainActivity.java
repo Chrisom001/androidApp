@@ -77,9 +77,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     final String host = "www.foxcoparkingsolution.co.uk";
                     final String file = "/mobile/userLogin.php";
                     String json = convertToJson("login");
-
-                    if(checkNetworkConnection()){
-                        webConnection web = new webConnection();
+                    webConnection web = new webConnection();
+                    if(web.checkNetworkConnection(context)){
 
                         String result = web.urlConnection(host, file, json);
                         Toast.makeText(this, result, Toast.LENGTH_LONG).show();
@@ -106,14 +105,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         }
-    }
-
-    private boolean checkNetworkConnection(){
-        ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
-        return isConnected;
     }
 
     private String convertToJson(String reason) throws JSONException {
