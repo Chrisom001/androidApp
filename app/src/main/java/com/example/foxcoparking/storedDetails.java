@@ -1,6 +1,20 @@
 package com.example.foxcoparking;
+
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
 //https://www.tutorialspoint.com/java/java_using_singleton.htm - Used to work out how to build a simpleton
 public class storedDetails {
+
+    private String customerID;
     private String customerFirstName;
     private String customerLastName;
     private String customerCarReg;
@@ -16,6 +30,8 @@ public class storedDetails {
     public static storedDetails getInstance(){
         return storedDetails;
     }
+
+    public void setCustomerID(String custID){customerID = custID;}
 
     public void setCustomerFirstName(String custFirstName){
         customerFirstName = custFirstName;
@@ -38,6 +54,8 @@ public class storedDetails {
     public void setStatusReason(String custStatus){
         statusReason = custStatus;
     }
+
+    public String getCustomerID() {return customerID;}
 
     public String getCustomerFirstName(){
         return customerFirstName;

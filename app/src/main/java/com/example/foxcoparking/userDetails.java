@@ -1,6 +1,8 @@
 package com.example.foxcoparking;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -68,9 +70,35 @@ public class userDetails extends AppCompatActivity {
         CheckBox delete = findViewById(R.id.checkBoxConfirmDelete);
         if(delete.isChecked()){
             Toast.makeText(this, "Delete User", Toast.LENGTH_SHORT).show();
+            deleteConfirm();
         } else {
             Toast.makeText(this, "Don't Delete", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void deleteConfirm(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Do you want to delete your account?")
+                .setTitle("Delete Account");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finalDeleteUser();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
+
+    public void finalDeleteUser(){
+        Toast.makeText(this, "User Deleted", Toast.LENGTH_LONG).show();
     }
 
     public void updateUser(String json){

@@ -26,9 +26,8 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         storedDetails sd = storedDetails.getInstance();
-
-        String userID = getIntent().getStringExtra("userID");
-        fillUserData(userID);
+        sd.setCustomerID(getIntent().getStringExtra("userID"));
+        fillUserData(sd.getCustomerID());
         //Toast.makeText(this, "Customer ID: " + userID, Toast.LENGTH_LONG).show();
     }
 
