@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,9 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.stripe.android.Stripe;
+import com.stripe.android.model.Customer;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,13 +60,15 @@ public class userDetails extends AppCompatActivity {
             try {
                 webConnection web = new webConnection();
                 if(web.checkNetworkConnection(context)){
-                    String json = convertToJson(firstNameEntered, lastNameEntered, passwordEntered, carRegEntered);
+                    jsonConversion jsonConversion = new jsonConversion();
+
+                    String json = jsonConversion.encodeJsonString("userDetails", firstNameEntered, lastNameEntered, passwordEntered, carRegEntered, "");
                     updateUser(json);
                 } else {
                     Toast.makeText(this, "Web connection unavaliable. Please reconnect.", Toast.LENGTH_SHORT).show();
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
+            } catch(Exception e){
+                Toast.makeText(this, "There has been an error", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -70,10 +76,9 @@ public class userDetails extends AppCompatActivity {
     public void deleteUser(View view){
         CheckBox delete = findViewById(R.id.checkBoxConfirmDelete);
         if(delete.isChecked()){
-            Toast.makeText(this, "Delete User", Toast.LENGTH_SHORT).show();
             deleteConfirm();
         } else {
-            Toast.makeText(this, "Don't Delete", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Checkbox hasn't been ticked", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -99,7 +104,35 @@ public class userDetails extends AppCompatActivity {
     }
 
     public void finalDeleteUser(){
-        Toast.makeText(this, "User Deleted", Toast.LENGTH_LONG).show();
+        webConnection web = new webConnection();
+        if(web.checkNetworkConnection(context)){
+            try{
+                final String host = "www.foxcoparkingsolution.co.uk";
+                final String file = "/mobile/deleteUser.php";
+                jsonConversion jsonConversion = new jsonConversion();
+                String json = jsonConversion.encodeJsonString("deleteUser", storedDetails.getInstance().getCustomerID(), "", "", "", "");
+                String result = web.urlConnection(host, file, json);
+
+                if(result.equals("True")){
+                    SharedPreferences logonFile = getApplicationContext().getSharedPreferences("logonFile", Context.MODE_PRIVATE);
+                    if (logonFile.edit().clear().commit()) {
+                        storedDetails.getInstance().clearDetails();
+                        Intent intent = new Intent(this, MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(this, "Failed to Clear Settings", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(this, "User Deletion Failed.", Toast.LENGTH_SHORT).show();
+                }
+
+            } catch (Exception e){
+                Toast.makeText(this, "There has been an error", Toast.LENGTH_SHORT).show();
+            }
+
+        } else {
+            Toast.makeText(this, "No network connection. Please try again later", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void updateUser(String json){
@@ -116,24 +149,5 @@ public class userDetails extends AppCompatActivity {
 
         Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
 
-    }
-
-    private String convertToJson(String firstNameEntered, String lastNameEntered, String passwordEntered, String carRegEntered) throws JSONException {
-
-        JSONObject userDetails = new JSONObject();
-
-        userDetails.put("firstName", firstNameEntered);
-        userDetails.put("lastName", lastNameEntered);
-        userDetails.put("carReg", carRegEntered);
-        if(!passwordEntered.isEmpty()){
-            userDetails.put("password", passwordEntered);
-        } else {
-            userDetails.put("password", "none");
-        }
-        userDetails.put("emailAddress", storedDetails.getInstance().getCustomerEmail());
-
-
-        String result = userDetails.toString();
-        return result;
     }
 }

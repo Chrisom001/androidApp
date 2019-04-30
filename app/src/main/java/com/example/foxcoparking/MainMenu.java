@@ -44,7 +44,8 @@ public class MainMenu extends AppCompatActivity {
         try {
             final String host = "www.foxcoparkingsolution.co.uk";
             final String file = "/mobile/userDetails.php";
-            String json = convertToJson(customerID);
+            jsonConversion jsonConversion = new jsonConversion();
+            String json = jsonConversion.encodeJsonString("customerID", customerID, "", "", "", "");
             webConnection web = new webConnection();
 
             if(web.checkNetworkConnection(context)){
@@ -63,20 +64,7 @@ public class MainMenu extends AppCompatActivity {
 
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-    }
-
-    private String convertToJson(String customerID) throws JSONException {
-
-        JSONObject userDetails = new JSONObject();
-
-        userDetails.put("customerID", customerID);
-
-        String result = userDetails.toString();
-
-        return result;
     }
 
     public void backToLogin() {

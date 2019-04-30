@@ -76,7 +76,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 try {
                     final String host = "www.foxcoparkingsolution.co.uk";
                     final String file = "/mobile/userLogin.php";
-                    String json = convertToJson("login");
+                    jsonConversion jsonString = new jsonConversion();
+                    String json = jsonString.encodeJsonString("login", userName, password, "", "" ,"");
                     webConnection web = new webConnection();
                     if(web.checkNetworkConnection(context)){
 
@@ -99,8 +100,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
                 } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
