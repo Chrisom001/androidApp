@@ -5,20 +5,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.stripe.android.Stripe;
-import com.stripe.android.model.Customer;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -30,6 +22,10 @@ public class userDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_details);
+        fillDetails();
+    }
+
+    public void fillDetails(){
         EditText firstName = findViewById(R.id.editTextFirstName);
         EditText lastName = findViewById(R.id.editTextLastName);
         EditText carReg = findViewById(R.id.editTextCarReg);
@@ -147,7 +143,14 @@ public class userDetails extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+        if(result.equals("True")){
+            storeUserDetails userDetails = new storeUserDetails();
+            userDetails.fillUserData(storedDetails.getInstance().getCustomerID(), context);
+            fillDetails();
+            Toast.makeText(this, "User updated.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "User not updated. Try again", Toast.LENGTH_SHORT).show();
+        }
 
     }
 }

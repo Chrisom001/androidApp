@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if(web.checkNetworkConnection(context)){
 
                         String result = web.urlConnection(host, file, json);
-                        Toast.makeText(this, result, Toast.LENGTH_LONG).show();
                         if (result.equals("wrongPassword")){
                             Toast.makeText(this, "Login Failed. Try Again", Toast.LENGTH_LONG).show();
                         } else if(result.equals("noUser")) {
@@ -104,21 +103,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         }
-    }
-
-    private String convertToJson(String reason) throws JSONException {
-
-        JSONObject userDetails = new JSONObject();
-
-        if(reason.equals("login")){
-            userDetails.put("userName", userName);
-            userDetails.put("password", password);
-        } else{
-            return null;
-        }
-
-        String result = userDetails.toString();
-        return result;
     }
 
     private void createPreference(String custID){

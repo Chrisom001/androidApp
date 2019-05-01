@@ -17,9 +17,9 @@ public class jsonConversion {
             } else if (reason.equals("userDetails")){
                 userDetails.put("firstName", option1);
                 userDetails.put("lastName", option2);
-                userDetails.put("carReg", option3);
+                userDetails.put("carReg", option4);
                 if(!option4.isEmpty()){
-                    userDetails.put("password", option4);
+                    userDetails.put("password", option3);
                 } else {
                     userDetails.put("password", "none");
                 }

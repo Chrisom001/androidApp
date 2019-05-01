@@ -3,20 +3,10 @@ package com.example.foxcoparking;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainMenu extends AppCompatActivity {
     Context context = this;
@@ -25,10 +15,20 @@ public class MainMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+        fillUserDetails();
+    }
+
+    public void fillUserDetails(){
         storedDetails sd = storedDetails.getInstance();
         sd.setCustomerID(getIntent().getStringExtra("userID"));
-        fillUserData(sd.getCustomerID());
-        //Toast.makeText(this, "Customer ID: " + userID, Toast.LENGTH_LONG).show();
+
+        storeUserDetails user = new storeUserDetails();
+        user.fillUserData(sd.getCustomerID(), context);
+    }
+
+    public void goToMap(View view){
+        Intent intent = new Intent(this, carParkMap.class);
+        startActivity(intent);
     }
 
     public void logOut(View view){
@@ -40,31 +40,9 @@ public class MainMenu extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void fillUserData(String customerID){
-        try {
-            final String host = "www.foxcoparkingsolution.co.uk";
-            final String file = "/mobile/userDetails.php";
-            jsonConversion jsonConversion = new jsonConversion();
-            String json = jsonConversion.encodeJsonString("customerID", customerID, "", "", "", "");
-            webConnection web = new webConnection();
-
-            if(web.checkNetworkConnection(context)){
-
-                String result = web.urlConnection(host, file, json);
-
-                if (result.equals("False")){
-                    Toast.makeText(this, "Login Failed. Try Again", Toast.LENGTH_LONG).show();
-                } else{
-                    decodeJson(result);
-                }
-
-            } else {
-                Toast.makeText(this, "Please reconnect to the Internet and try again!", Toast.LENGTH_LONG).show();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void goToBills(View view){
+        Intent intent = new Intent(this, ViewBills.class);
+        startActivity(intent);
     }
 
     public void backToLogin() {
@@ -79,19 +57,8 @@ public class MainMenu extends AppCompatActivity {
         }
     }
 
-    public void decodeJson(String json){
-        try{
-            JSONArray user = new JSONArray(json);
-            JSONObject userObject = user.getJSONObject(0);
-
-            storedDetails.getInstance().setCustomerFirstName(userObject.getString("firstName"));
-            storedDetails.getInstance().setCustomerLastName(userObject.getString("lastName"));
-            storedDetails.getInstance().setCustomerEmail(userObject.getString("email"));
-            storedDetails.getInstance().setCustomerCarReg(userObject.getString("carReg"));
-            storedDetails.getInstance().setStatus(userObject.getInt("status"));
-            storedDetails.getInstance().setStatusReason(userObject.getString("statusReason"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    @Override
+    public void onBackPressed(){
+        Toast.makeText(this, "Back button is disabled on this page", Toast.LENGTH_SHORT).show();
     }
 }
