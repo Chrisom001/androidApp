@@ -1,46 +1,60 @@
 package com.example.foxcoparking;
 
+import android.app.Activity;
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
-public class viewActivities extends AppCompatActivity {
+public class viewActivities extends Activity implements AdapterView.OnItemSelectedListener {
     Context context = this;
     String[][] activities;
     String[] activityInformation;
-    String[] testArray;
     Spinner activityListing;
+    ArrayAdapter<String> adapter;
+    TextView carText;
+    TextView carParkText;
+    TextView entryTimeText;
+    TextView exitTimeText;
+    TextView seasonPermitText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_activities);
-        testArray = new String[3];
-        testArray[0] = "test";
-        testArray[1] = "test2";
-        testArray[2] = "test3";
+
+        //Set all the text views
+        carText = findViewById(R.id.textViewCarRegUsed);
+        carParkText = findViewById(R.id.textViewCarParkUsed);
+        entryTimeText = findViewById(R.id.textViewEntryTime);
+        exitTimeText = findViewById(R.id.textViewExitTime);
+        seasonPermitText = findViewById(R.id.textViewSeasonPermit);
+
         activityListing = findViewById(R.id.spinnerActivityList);
+        activityListing.setOnItemSelectedListener(this);
         fillActivities();
         fillSpinner();
     }
 
     public void fillSpinner(){
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, activities[0]);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, activityInformation);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         activityListing.setAdapter(adapter);
     }
 
     public void fillActivities(){
         final String file = "/mobile/userActivities.php";
+        final String carParkFile = "/mobile/carPark.php";
         String queryResult = "";
         webConnection web = new webConnection();
         jsonConversion json = new jsonConversion();
@@ -56,16 +70,17 @@ public class viewActivities extends AppCompatActivity {
         try {
             JSONArray activityJson = new JSONArray(queryResult);
             JSONObject activityObject;
-            Toast.makeText(this, "Json List Length is " + activityJson.length(), Toast.LENGTH_LONG).show();
             activityInformation = new String[activityJson.length()];
             activities = new String[activityJson.length()][10];
             for(int i = 0; i < activityJson.length(); i++){
                 activityObject = activityJson.getJSONObject(i);
-
+                activityInformation[i] = activityObject.getString("activityID");
                 activities[i][0] = activityObject.getString("activityID");
                 activities[i][1] = activityObject.getString("customerID");
                 activities[i][2] = activityObject.getString("carReg");
-                activities[i][3] = activityObject.getString("carParkID");
+                String carParkjson = json.encodeJsonString("carParkName", activityObject.getString("carParkID"), "", "", "", "");
+                String carParkName = web.urlConnection(carParkFile, carParkjson);
+                activities[i][3] = carParkName;
                 activities[i][4] = activityObject.getString("enterTimestamp");
                 activities[i][5] = activityObject.getString("exitTimestamp");
                 if(activityObject.equals("0")){
@@ -80,6 +95,37 @@ public class viewActivities extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(this, "Json Failure", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+
+        String item = parent.getItemAtPosition(position).toString();
+        for (int i = 0; i < activities.length; i++) {
+            if(activities[i][0].equals(item)){
+                carText.setText(activities[i][2]);
+                carParkText.setText(activities[i][3]);
+                entryTimeText.setText(activities[i][4]);
+                exitTimeText.setText(activities[i][5]);
+                seasonPermitText.setText(activities[i][6]);
+                break;
+            } else {
+
+            }
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    public void returnToMenu(View view){
+        Intent intent = new Intent(this, MainMenu.class);
+        startActivity(intent);
     }
 }

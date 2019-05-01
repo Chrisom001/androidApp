@@ -28,7 +28,9 @@ public class jsonConversion {
                 userDetails.put("customerID", option1);
             }else if(reason.equals("activities")) {
                 userDetails.put("customerID", option1);
-            }else{
+            }else if (reason.equals("carParkName")){
+                userDetails.put("carParkID", option1);
+            }else {
                 return null;
             }
         } catch (JSONException e) {
