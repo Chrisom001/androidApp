@@ -3,6 +3,7 @@ package com.example.foxcoparking;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,9 +23,11 @@ public class MainMenu extends AppCompatActivity {
 
     public void checkBannedState(){
         int status = storedDetails.getInstance().getStatus();
+        TextView statusText = findViewById(R.id.textViewBanned);
         if(status == 0){
-            TextView statusText =findViewById(R.id.textViewBanned);
             statusText.setVisibility(View.VISIBLE);
+        } else {
+            statusText.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -81,5 +84,12 @@ public class MainMenu extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         Toast.makeText(this, "Back button is disabled on this page", Toast.LENGTH_SHORT).show();
+    }
+
+    public void callFoxCo(View view){
+        String phoneNumber = "tel:07731486650";
+        Intent intent = new Intent("android.intent.action.DIAL", Uri.parse(phoneNumber));
+        startActivity(intent);
+
     }
 }
