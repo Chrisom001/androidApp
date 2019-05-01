@@ -11,7 +11,6 @@ public class storeUserDetails {
     public String fillUserData(String customerID, Context context){
         String finalResult = "";
         try {
-            final String host = "www.foxcoparkingsolution.co.uk";
             final String file = "/mobile/userDetails.php";
             jsonConversion jsonConversion = new jsonConversion();
             String json = jsonConversion.encodeJsonString("customerID", customerID, "", "", "", "");
@@ -19,7 +18,7 @@ public class storeUserDetails {
 
             if(web.checkNetworkConnection(context)){
 
-                String result = web.urlConnection(host, file, json);
+                String result = web.urlConnection(file, json);
 
                 if (result.equals("False")){
                     finalResult = "notUpdated";

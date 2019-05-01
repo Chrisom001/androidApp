@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainMenu extends AppCompatActivity {
@@ -16,6 +17,15 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         fillUserDetails();
+        checkBannedState();
+    }
+
+    public void checkBannedState(){
+        int status = storedDetails.getInstance().getStatus();
+        if(status == 0){
+            TextView statusText =findViewById(R.id.textViewBanned);
+            statusText.setVisibility(View.VISIBLE);
+        }
     }
 
     public void fillUserDetails(){
@@ -23,11 +33,22 @@ public class MainMenu extends AppCompatActivity {
         sd.setCustomerID(getIntent().getStringExtra("userID"));
 
         storeUserDetails user = new storeUserDetails();
-        user.fillUserData(sd.getCustomerID(), context);
+        String result = user.fillUserData(sd.getCustomerID(), context);
+        if(result.equals("notUpdated")){
+            Toast.makeText(this, "User does not exist", Toast.LENGTH_LONG).show();
+            backToLogin();
+        } else if(result.equals("noInternet")){
+            Toast.makeText(this, "No internet connection", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void goToMap(View view){
-        Intent intent = new Intent(this, carParkMap.class);
+            Intent intent = new Intent(this, carParkMapping.class);
+            startActivity(intent);
+    }
+
+    public void goToActivities(View view){
+        Intent intent = new Intent(this, viewActivities.class);
         startActivity(intent);
     }
 

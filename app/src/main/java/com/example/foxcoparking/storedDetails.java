@@ -1,5 +1,7 @@
 package com.example.foxcoparking;
 
+import java.util.ArrayList;
+
 //https://www.tutorialspoint.com/java/java_using_singleton.htm - Used to work out how to build a simpleton
 public class storedDetails {
 
@@ -11,7 +13,6 @@ public class storedDetails {
     private String statusReason;
     private int status;
 
-
     private static storedDetails storedDetails = new storedDetails();
 
     private storedDetails(){}
@@ -22,9 +23,7 @@ public class storedDetails {
 
     public void setCustomerID(String custID){customerID = custID;}
 
-    public void setCustomerFirstName(String custFirstName){
-        customerFirstName = custFirstName;
-    }
+    public void setCustomerFirstName(String custFirstName){customerFirstName = custFirstName;}
 
     public void setCustomerLastName(String custLastName){
         customerLastName = custLastName;

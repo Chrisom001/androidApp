@@ -15,7 +15,8 @@ import java.net.URLConnection;
 
 public class webConnection {
 
-    public String urlConnection(String host, String file, String output) throws IOException {
+    public String urlConnection(String file, String output) throws IOException {
+        final String host = "www.foxcoparkingsolution.co.uk";
         URL urlConnection = new URL("http", host, file);
         URLConnection conn = urlConnection.openConnection();
         conn.setDoInput(true);

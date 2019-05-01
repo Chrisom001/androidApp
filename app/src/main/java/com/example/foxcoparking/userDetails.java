@@ -103,11 +103,10 @@ public class userDetails extends AppCompatActivity {
         webConnection web = new webConnection();
         if(web.checkNetworkConnection(context)){
             try{
-                final String host = "www.foxcoparkingsolution.co.uk";
                 final String file = "/mobile/deleteUser.php";
                 jsonConversion jsonConversion = new jsonConversion();
                 String json = jsonConversion.encodeJsonString("deleteUser", storedDetails.getInstance().getCustomerID(), "", "", "", "");
-                String result = web.urlConnection(host, file, json);
+                String result = web.urlConnection(file, json);
 
                 if(result.equals("True")){
                     SharedPreferences logonFile = getApplicationContext().getSharedPreferences("logonFile", Context.MODE_PRIVATE);
@@ -135,10 +134,9 @@ public class userDetails extends AppCompatActivity {
         String result = "";
         try{
             webConnection web = new webConnection();
-            final String host = "www.foxcoparkingsolution.co.uk";
             final String file = "/mobile/updateUserDetails.php";
 
-            result = web.urlConnection(host, file, json);
+            result = web.urlConnection(file, json);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">FoxCoParking</string>
     <string name="title_activity_car_park_map">FoxCo Map</string>
+    <string name="title_activity_car_park_mapping">Car Parks</string>
 </resources>

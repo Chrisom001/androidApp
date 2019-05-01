@@ -74,14 +74,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(this, "No Password entered", Toast.LENGTH_SHORT).show();
             } else {
                 try {
-                    final String host = "www.foxcoparkingsolution.co.uk";
                     final String file = "/mobile/userLogin.php";
                     jsonConversion jsonString = new jsonConversion();
                     String json = jsonString.encodeJsonString("login", userName, password, "", "" ,"");
                     webConnection web = new webConnection();
                     if(web.checkNetworkConnection(context)){
 
-                        String result = web.urlConnection(host, file, json);
+                        String result = web.urlConnection(file, json);
                         if (result.equals("wrongPassword")){
                             Toast.makeText(this, "Login Failed. Try Again", Toast.LENGTH_LONG).show();
                         } else if(result.equals("noUser")) {

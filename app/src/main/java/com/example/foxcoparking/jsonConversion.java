@@ -26,6 +26,8 @@ public class jsonConversion {
                 userDetails.put("emailAddress", storedDetails.getInstance().getCustomerEmail());
             } else if(reason.equals("deleteUser")) {
                 userDetails.put("customerID", option1);
+            }else if(reason.equals("activities")) {
+                userDetails.put("customerID", option1);
             }else{
                 return null;
             }
