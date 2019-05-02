@@ -44,6 +44,7 @@ public class viewActivities extends Activity implements AdapterView.OnItemSelect
         activityListing.setOnItemSelectedListener(this);
         fillActivities();
         fillSpinner();
+        Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
     }
 
     public void fillSpinner(){
@@ -122,10 +123,5 @@ public class viewActivities extends Activity implements AdapterView.OnItemSelect
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
-    }
-
-    public void returnToMenu(View view){
-        Intent intent = new Intent(this, MainMenu.class);
-        startActivity(intent);
     }
 }

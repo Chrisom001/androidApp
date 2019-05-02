@@ -165,9 +165,4 @@ public class ViewBills extends Activity implements AdapterView.OnItemSelectedLis
             payButton.setVisibility(View.VISIBLE);
         }
     }
-
-    public void returnToMainMenu(View view){
-        Intent intent = new Intent(this, MainMenu.class);
-        startActivity(intent);
-    }
 }
