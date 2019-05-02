@@ -22,69 +22,66 @@
         android:id="@+id/buttonViewDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="71dp"
         android:onClick="userDetails"
         android:text="@string/view_details"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewBanned" />
 
     <Button
         android:id="@+id/buttonViewBills"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="71dp"
+        android:layout_marginEnd="87dp"
         android:onClick="goToBills"
         android:text="@string/view_bills"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonViewDetails" />
+        app:layout_constraintStart_toEndOf="@+id/buttonCallFoxCo"
+        app:layout_constraintTop_toBottomOf="@+id/textViewBanned" />
 
     <Button
         android:id="@+id/buttonViewActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="83dp"
+        android:layout_marginBottom="65dp"
         android:onClick="goToActivities"
         android:text="@string/view_activity"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonViewBills" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonViewDetails" />
 
     <Button
         android:id="@+id/buttonBrowseCarParks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="69dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginBottom="65dp"
         android:onClick="goToMap"
         android:text="@string/browse_car_parks"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonViewActivity" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonViewActivity"
+        app:layout_constraintTop_toBottomOf="@+id/buttonCallFoxCo" />
 
     <Button
         android:id="@+id/buttonLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="43dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginStart="94dp"
+        android:layout_marginTop="83dp"
+        android:layout_marginEnd="87dp"
+        android:layout_marginBottom="65dp"
         android:onClick="logOut"
         android:text="@string/logout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.485"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonCallFoxCo" />
+        app:layout_constraintStart_toEndOf="@+id/buttonBrowseCarParks"
+        app:layout_constraintTop_toBottomOf="@+id/buttonViewBills" />
 
     <TextView
         android:id="@+id/textViewBanned"
@@ -106,12 +103,10 @@
         android:id="@+id/buttonCallFoxCo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="119dp"
-        android:layout_marginTop="37dp"
-        android:layout_marginEnd="120dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="44dp"
         android:onClick="callFoxCo"
         android:text="@string/call_foxco_support"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonBrowseCarParks" />
+        app:layout_constraintStart_toEndOf="@+id/buttonViewDetails"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 </android.support.constraint.ConstraintLayout>

@@ -13,6 +13,7 @@
         android:layout_marginStart="251dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="250dp"
+        android:contentDescription="@string/foxcologo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -25,7 +26,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="194dp"
         android:layout_marginBottom="24dp"
-        android:text="Email Address"
+        android:text="@string/email_address"
         app:layout_constraintBottom_toTopOf="@+id/passwordLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="60dp"
-        android:text="Password"
+        android:text="@string/password"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -72,9 +73,9 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="162dp"
         android:layout_marginBottom="8dp"
-        android:text="Remember Me"
-        android:textOff="No"
-        android:textOn="Yes"
+        android:text="@string/remember_me"
+        android:textOff="@string/no"
+        android:textOn="@string/yes"
         app:layout_constraintBottom_toTopOf="@+id/loginButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/emailAddressEnter"
@@ -87,7 +88,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="193dp"
         android:layout_marginBottom="50dp"
-        android:text="Login"
+        android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/passwordEnter" />

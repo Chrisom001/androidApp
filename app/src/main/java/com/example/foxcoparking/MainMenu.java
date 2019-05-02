@@ -1,9 +1,15 @@
 package com.example.foxcoparking;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainMenu extends AppCompatActivity {
+    private static final int REQUEST_CALL_PHONE = 1;
     Context context = this;
 
     @Override
@@ -86,10 +93,52 @@ public class MainMenu extends AppCompatActivity {
         Toast.makeText(this, "Back button is disabled on this page", Toast.LENGTH_SHORT).show();
     }
 
+    //https://www.youtube.com/watch?v=SMrB97JuIoM - for checking permissions
     public void callFoxCo(View view){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED){
+            makeCall();
+        } else {
+            requestPhonePermission();
+        }
+    }
+
+    private void requestPhonePermission(){
+        if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CALL_PHONE)) {
+            final android.app.AlertDialog.Builder permission = new android.app.AlertDialog.Builder(this);
+            permission.setTitle("Request Permission");
+            permission.setMessage("This permission is required to call FoxCo Support Only");
+            permission.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    ActivityCompat.requestPermissions(MainMenu.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL_PHONE);
+                }
+            });
+            permission.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            permission.create().show();
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL_PHONE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == REQUEST_CALL_PHONE){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                makeCall();
+            } else {
+                Toast.makeText(this, "Permission Denied. Unable to make Call", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public void makeCall(){
         String phoneNumber = "tel:07731486650";
         Intent intent = new Intent("android.intent.action.DIAL", Uri.parse(phoneNumber));
         startActivity(intent);
-
     }
 }

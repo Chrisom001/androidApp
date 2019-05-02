@@ -13,7 +13,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="140dp"
         android:layout_marginEnd="8dp"
-        android:text="First Name"
+        android:text="@string/first_name"
         app:layout_constraintEnd_toStartOf="@+id/editTextFirstName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +27,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewUserDetails" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserDetails"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/textViewLastName"
@@ -36,7 +37,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
-        android:text="Last Name"
+        android:text="@string/last_name"
         app:layout_constraintEnd_toStartOf="@+id/editTextLastName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewFirstName" />
@@ -50,7 +51,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextFirstName" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextFirstName"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/textViewCarReg"
@@ -59,7 +61,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
-        android:text="Car Reg"
+        android:text="@string/car_reg"
         app:layout_constraintEnd_toStartOf="@+id/editTextCarReg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewLastName" />
@@ -81,7 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="45dp"
-        android:text="Password"
+        android:text="@string/password"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -95,7 +97,8 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewPassword"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/buttonSave"
@@ -105,7 +108,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         android:onClick="saveUserDetails"
-        android:text="Save Details"
+        android:text="@string/save_details"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/buttonDelete"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxConfirmDelete" />
@@ -117,7 +120,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:onClick="deleteUser"
-        android:text="Delete Account"
+        android:text="@string/delete_account"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxConfirmDelete" />
 
@@ -128,7 +131,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="150dp"
-        android:text="Confirm Account Deletion"
+        android:text="@string/confirm_account_deletion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPassword" />
@@ -140,7 +143,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
-        android:text="User Details"
+        android:text="@string/user_details"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -152,7 +155,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="8dp"
-        android:text="If you wish to change your password. Enter the new one below"
+        android:text="@string/if_you_wish_to_change_your_password_enter_the_new_one_below"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextCarReg" />

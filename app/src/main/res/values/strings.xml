@@ -1,5 +1,44 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">FoxCoParking</string>
     <string name="title_activity_car_park_map">FoxCo Map</string>
     <string name="title_activity_car_park_mapping">Car Parks</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="password">Password</string>
+    <string name="save_details">Save Details</string>
+    <string name="car_reg">Car Reg</string>
+    <string name="user_details">User Details</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="confirm_account_deletion">Confirm Account Deletion</string>
+    <string name="if_you_wish_to_change_your_password_enter_the_new_one_below">If you wish to change your password. Enter the new one below</string>
+    <string name="foxcologo">FoxCoLogo</string>
+    <string name="email_address">Email Address</string>
+    <string name="login">Login</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="view_details">View Details</string>
+    <string name="view_bills">View Bills</string>
+    <string name="view_activity">View Activity</string>
+    <string name="browse_car_parks">Browse Car Parks</string>
+    <string name="logout">Logout</string>
+    <string name="this_account_is_currently_banned_please_contact_support">This account is currently banned. Please contact support</string>
+    <string name="call_foxco_support">Call FoxCo Support</string>
+    <string name="select_the_activity_to_view">Select the Activity to View</string>
+    <string name="car_used">Car Used:</string>
+    <string name="car_park_used">Car Park Used:</string>
+    <string name="entry_time">Entry Time:</string>
+    <string name="exit_time">Exit Time:</string>
+    <string name="season_permit_used">Season Permit Used:</string>
+    <string name="select_the_activity_you_wish_to_view_and_the_details_will_be_shown_below">Select the activity you wish to view and the details will be shown below</string>
+    <string name="textview">TextView</string>
+    <string name="please_select_the_invoice_you_would_like_to_view_below">Please select the invoice you would like to view below</string>
+    <string name="invoice_id">Invoice ID:</string>
+    <string name="payment_status">Payment Status:</string>
+    <string name="cost">Cost:</string>
+    <string name="currency">Currency</string>
+    <string name="pay">Pay</string>
+    <string name="pay_bill" tools:ignore="ExtraTranslation">Pay Bill</string>
+    <string name="return_to_main_menu">Return to Main Menu</string>
 </resources>

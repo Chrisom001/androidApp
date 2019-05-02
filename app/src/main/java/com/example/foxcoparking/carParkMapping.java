@@ -1,11 +1,20 @@
 package com.example.foxcoparking;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -23,11 +32,14 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.List;
 
-public class carParkMapping extends FragmentActivity implements GoogleMap.OnMarkerClickListener, OnMapReadyCallback {
+public class carParkMapping extends FragmentActivity implements GoogleMap.OnMarkerClickListener, OnMapReadyCallback, LocationListener {
 
     private GoogleMap mMap;
+    private LatLng current;
+    private static final int REQUEST_LOCATION = 1;
     Context context = this;
     String[][] Cities;
+    LocationManager locationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,5 +167,74 @@ public class carParkMapping extends FragmentActivity implements GoogleMap.OnMark
         AlertDialog dialog = prices.create();
         dialog.show();
         return false;
+    }
+
+    private void placeCurrentLocation(){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+            placeCurrentLocationMarker();
+        } else {
+            requestLocationPermission();
+        }
+    }
+
+    private void requestLocationPermission(){
+        if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+            final android.app.AlertDialog.Builder permission = new android.app.AlertDialog.Builder(this);
+            permission.setTitle("Request Permission");
+            permission.setMessage("This permission is required to show your location on the map");
+            permission.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    ActivityCompat.requestPermissions(carParkMapping.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_LOCATION);
+                }
+            });
+            permission.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            permission.create().show();
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == REQUEST_LOCATION){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                placeCurrentLocationMarker();
+            } else {
+                Toast.makeText(this, "Permission Denied. Unable to place current marker", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public void placeCurrentLocationMarker(){
+        //try{
+            //locationManager = getSystemService(Context.LOCATION_SERVICE);
+            //locationManager.requestLocationUpdates(locationManager.NETWORK_PROVIDER, 5000, 5, this);
+        //}
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
     }
 }
