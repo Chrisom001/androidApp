@@ -1,4 +1,4 @@
-package com.example.foxcoparking;
+package com.example.foxcoparking.view;
 
 import android.Manifest;
 import android.content.Context;
@@ -15,6 +15,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.foxcoparking.R;
+import com.example.foxcoparking.controller.storeUserDetails;
+import com.example.foxcoparking.controller.storedDetails;
 
 public class MainMenu extends AppCompatActivity {
     private static final int REQUEST_CALL_PHONE = 1;

@@ -1,4 +1,4 @@
-package com.example.foxcoparking;
+package com.example.foxcoparking.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
+
+import com.example.foxcoparking.R;
 
 public class payBillOnline extends AppCompatActivity {
     private String address;

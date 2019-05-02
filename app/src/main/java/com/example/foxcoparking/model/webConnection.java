@@ -1,4 +1,4 @@
-package com.example.foxcoparking;
+package com.example.foxcoparking.model;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

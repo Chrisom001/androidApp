@@ -1,8 +1,7 @@
-package com.example.foxcoparking;
+package com.example.foxcoparking.view;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,6 +9,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.foxcoparking.R;
+import com.example.foxcoparking.model.jsonConversion;
+import com.example.foxcoparking.model.webConnection;
+import com.example.foxcoparking.controller.storedDetails;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

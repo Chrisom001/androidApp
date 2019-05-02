@@ -1,4 +1,4 @@
-package com.example.foxcoparking;
+package com.example.foxcoparking.view;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -11,6 +11,12 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.foxcoparking.R;
+import com.example.foxcoparking.model.jsonConversion;
+import com.example.foxcoparking.model.webConnection;
+import com.example.foxcoparking.controller.storeUserDetails;
+import com.example.foxcoparking.controller.storedDetails;
 
 import java.io.IOException;
 

@@ -1,6 +1,4 @@
-package com.example.foxcoparking;
-
-import java.util.ArrayList;
+package com.example.foxcoparking.controller;
 
 //https://www.tutorialspoint.com/java/java_using_singleton.htm - Used to work out how to build a simpleton
 public class storedDetails {

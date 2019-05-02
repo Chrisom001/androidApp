@@ -19,8 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".payBillOnline"></activity>
-        <activity android:name=".viewActivities" />
+        <activity android:name=".view.payBillOnline"></activity>
+        <activity android:name=".view.viewActivities" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -34,12 +34,12 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".carParkMapping"
+            android:name=".view.carParkMapping"
             android:label="@string/title_activity_car_park_mapping" />
-        <activity android:name=".ViewBills" />
-        <activity android:name=".userDetails" />
-        <activity android:name=".MainMenu" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".view.ViewBills" />
+        <activity android:name=".view.userDetails" />
+        <activity android:name=".view.MainMenu" />
+        <activity android:name=".view.MainActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

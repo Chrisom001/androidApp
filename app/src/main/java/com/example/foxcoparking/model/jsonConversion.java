@@ -1,4 +1,6 @@
-package com.example.foxcoparking;
+package com.example.foxcoparking.model;
+
+import com.example.foxcoparking.controller.storedDetails;
 
 import org.json.JSONException;
 import org.json.JSONObject;

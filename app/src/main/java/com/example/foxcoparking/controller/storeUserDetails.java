@@ -1,6 +1,10 @@
-package com.example.foxcoparking;
+package com.example.foxcoparking.controller;
 
 import android.content.Context;
+
+import com.example.foxcoparking.model.jsonConversion;
+import com.example.foxcoparking.model.webConnection;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

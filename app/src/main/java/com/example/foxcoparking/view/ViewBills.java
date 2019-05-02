@@ -1,21 +1,20 @@
-package com.example.foxcoparking;
+package com.example.foxcoparking.view;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.StrictMode;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.foxcoparking.R;
+import com.example.foxcoparking.model.jsonConversion;
+import com.example.foxcoparking.model.webConnection;
+import com.example.foxcoparking.controller.storedDetails;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,6 +46,13 @@ public class ViewBills extends Activity implements AdapterView.OnItemSelectedLis
 
         invoiceListing = findViewById(R.id.spinnerInvoiceID);
         invoiceListing.setOnItemSelectedListener(this);
+        getBills();
+        fillInvoiceIDs();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         getBills();
         fillInvoiceIDs();
     }

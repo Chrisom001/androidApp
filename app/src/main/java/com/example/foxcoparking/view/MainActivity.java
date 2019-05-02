@@ -1,12 +1,10 @@
-package com.example.foxcoparking;
+package com.example.foxcoparking.view;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.content.ContextCompat;
@@ -16,8 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
-import org.json.JSONException;
-import org.json.JSONObject;
+
+import com.example.foxcoparking.R;
+import com.example.foxcoparking.model.jsonConversion;
+import com.example.foxcoparking.model.webConnection;
+
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(!permissionCheck()){
             Toast.makeText(this, "No Internet Permission", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Internet Permission Granted", Toast.LENGTH_SHORT).show();
+
         }
         if(!"notCreated".equals(checkPreference())){
             moveToMainMenu(checkPreference());
